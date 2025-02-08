@@ -1,0 +1,31 @@
+name: MyDeployWF
+
+on:
+  workflow_dispatch
+
+env:
+  SERVER_HOST: '85.28.47.165'
+  SERVER_USER: root
+  SERVER_PATH: /var/www/truruki.ru/html/
+
+jobs:
+
+  deployJobs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Install ssh key
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2.3.1
+        with:
+          key: "${{ secrets.PKEY }}"
+          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
+          
+      - name: Generate auth hosts
+        run: ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      # Deploy
+      - run: rsync --archive --compress --progress . ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
+       
+
