@@ -1,0 +1,21 @@
+name: DeployWF
+
+on:
+  workflow_dispatch
+
+env:
+  SERVER_HOST: 85.28.47.165
+  SERVER_USER: root
+  SERVER_PATH: /var/www/truruki.ru/html/
+
+jobs:
+
+  deployJ:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display some text
+        run: echo "Hello World!!!!!"
+      - name: Display var
+        run: echo "{{SERVER_HOST}}"
+       
+
