@@ -16,6 +16,6 @@ jobs:
       - name: Display some text
         run: echo "Hello World!!!!!"
       - name: Display var
-        run: echo "{{SERVER_HOST}}"
+        run: echo "${{SERVER_HOST}}"
        
 
