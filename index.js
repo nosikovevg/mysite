@@ -5,6 +5,7 @@ const ocNode = document.querySelector(".js-oc");
 
 btnNode.addEventListener("click", function() {
     console.log(inputNode.value);
+    ocNode.innerHTML = inputNode.value;
 })
 
 
